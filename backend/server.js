@@ -13,7 +13,7 @@ app.use("/api/posts", postRoutes);
 const start = async () => {
     try {
 const connectDB = await mongoose.connect(
-    "mongodb+srv://soumen_linkden:FbhjwUIyIbq6sxJo:<password>@cluster0.ehezjvp.mongodb.net/?appName=Cluster0"
+    "mongodb+srv://soumen_linkden:FbhjwUIyIbq6sxJo:soumen@123@cluster0.ehezjvp.mongodb.net/?appName=Cluster0"
 );
 app.listen(5000, () => {
     console.log("Server is running on port 5000");
