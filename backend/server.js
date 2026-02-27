@@ -3,7 +3,7 @@ import cors from "cors";
 import { config } from "dotenv";
 import mongoose from "mongoose";
 import postRoutes from "./routes/post.routes.js";
-
+import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
@@ -13,7 +13,7 @@ app.use("/api/posts", postRoutes);
 const start = async () => {
     try {
 const connectDB = await mongoose.connect(
-    "mongodb+srv://soumen_linkden:FbhjwUIyIbq6sxJo:soumen@123@cluster0.ehezjvp.mongodb.net/?appName=Cluster0"
+    "mongodb+srv://soumen_linkden:zUJWaXwEv6mzTbAI@linkdenclone.7astwrb.mongodb.net/?appName=linkdenClone"
 );
 app.listen(5000, () => {
     console.log("Server is running on port 5000");
@@ -22,3 +22,5 @@ app.listen(5000, () => {
         console.error(error);
     }
 };
+
+start();
