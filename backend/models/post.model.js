@@ -2,7 +2,7 @@ import mongoose, { Types } from "mongoose";
 import { act } from "react";
 const postSchema = new mongoose.Schema({
     userId : {
-        type : Types.ObjectId,
+        type : mongoose.Schema.Types.ObjectId,
         ref : "User",
         required : true
     },
