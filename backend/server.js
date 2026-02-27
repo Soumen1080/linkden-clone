@@ -3,13 +3,16 @@ import cors from "cors";
 import { config } from "dotenv";
 import mongoose from "mongoose";
 import postRoutes from "./routes/post.routes.js";
+import userRoutes from "./routes/user.routes.js";
 import dotenv from "dotenv";
+
 dotenv.config();
 
 const app = express();
 app.use(cors());
-app.use(express.json());    
+app.use(express.json());    // make sure express.json is after cors and before routes
 app.use("/api/posts", postRoutes);
+app.use("/api/users", userRoutes);
 const start = async () => {
     try {
 const connectDB = await mongoose.connect(
