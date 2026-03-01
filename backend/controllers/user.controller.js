@@ -12,6 +12,19 @@ const register = async (req, res) => {
         if (!name || !email || !password) {
             return res.status(400).json({ error: "All fields are required" });
         }
+        if(password.length < 6) {
+            return res.status(400).json({ error: "Password must be at least 6 characters long" });
+        }
+        const isMatch = await bcrypt.compare(password, await bcrypt.hash(password, 10));
+        if (!isMatch) {
+            return res.status(400).json({ error: "Invalid password" });
+        }
+
+        const token = crypto.randomBytes(20).toString("hex");
+
+        await User.updateOne({ _id: user._id}, { token });
+
+        return res.json({ token });
 
         const existingUser = await User.findOne({ email });
         if (existingUser) {
