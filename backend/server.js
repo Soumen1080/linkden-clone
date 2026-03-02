@@ -1,28 +1,29 @@
 import express from "express";
 import cors from "cors";
-import { config } from "dotenv";
 import mongoose from "mongoose";
+import dotenv from "dotenv";
 import postRoutes from "./routes/post.routes.js";
 import userRoutes from "./routes/user.routes.js";
-import dotenv from "dotenv";
 
 dotenv.config();
 
 const app = express();
 app.use(cors());
-app.use(express.json());    // make sure express.json is after cors and before routes
+app.use(express.json());
 app.use("/api/posts", postRoutes);
 app.use("/api/users", userRoutes);
+
 const start = async () => {
     try {
-const connectDB = await mongoose.connect(
-    "mongodb+srv://soumen_linkden:zUJWaXwEv6mzTbAI@linkdenclone.7astwrb.mongodb.net/?appName=linkdenClone"
-);
-app.listen(5000, () => {
-    console.log("Server is running on port 5000");
-});
+        await mongoose.connect(process.env.MONGODB_URI);
+        console.log("MongoDB connected successfully");
+        
+        app.listen(process.env.PORT || 5000, () => {
+            console.log(`Server is running on port ${process.env.PORT || 5000}`);
+        });
     } catch (error) {
-        console.error(error);
+        console.error("MongoDB connection error:", error);
+        process.exit(1);
     }
 };
 

@@ -12,19 +12,10 @@ const register = async (req, res) => {
         if (!name || !email || !password) {
             return res.status(400).json({ error: "All fields are required" });
         }
+        
         if(password.length < 6) {
             return res.status(400).json({ error: "Password must be at least 6 characters long" });
         }
-        const isMatch = await bcrypt.compare(password, await bcrypt.hash(password, 10));
-        if (!isMatch) {
-            return res.status(400).json({ error: "Invalid password" });
-        }
-
-        const token = crypto.randomBytes(20).toString("hex");
-
-        await User.updateOne({ _id: user._id}, { token });
-
-        return res.json({ token });
 
         const existingUser = await User.findOne({ email });
         if (existingUser) {
@@ -48,7 +39,15 @@ const register = async (req, res) => {
 
         await profile.save();
 
-        res.status(201).json({ message: "User registered successfully" });
+        res.status(201).json({ 
+            message: "User registered successfully",
+            user: {
+                id: newUser._id,
+                name: newUser.name,
+                email: newUser.email,
+                username: newUser.username
+            }
+        });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }

@@ -1,11 +1,33 @@
-POST https://localhost:5000/register HTTP/1.1
-
+### Register a new user
+POST http://localhost:5000/api/users/register HTTP/1.1
 Content-Type: application/json
-̥
-{
-    "username": "soumenmandal1080",
-    "password": "soumen123",
-    "email": "soumenmandal1080@gmail.com",
-    "name": "Soumen Mandal"
 
-}̥
+{
+    "name": "Soumen Mandal",
+    "email": "soumenmandal1080@gmail.com",
+    "password": "soumen123"
+}
+
+###
+
+### Register another user
+POST http://localhost:5000/api/users/register HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "John Doe",
+    "email": "johndoe@example.com",
+    "password": "john123456"
+}
+
+###
+
+### Register third user
+POST http://localhost:5000/api/users/register HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "Jane Smith",
+    "email": "janesmith@example.com",
+    "password": "jane123456"
+}
